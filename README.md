@@ -43,6 +43,10 @@ docker compose up airflow-init
 docker compose up -d
 ```
 
+```bash
+docker compose down -v
+```
+
 
 # Desarrolladores
 
