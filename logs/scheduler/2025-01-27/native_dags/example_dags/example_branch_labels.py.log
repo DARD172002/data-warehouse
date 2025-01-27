@@ -1,0 +1,71 @@
+[2025-01-27T12:19:45.217+0000] {processor.py:186} INFO - Started process (PID=319) to work on /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:19:45.231+0000] {processor.py:914} INFO - Processing file /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py for tasks to queue
+[2025-01-27T12:19:45.238+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:45.237+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:19:45.321+0000] {processor.py:925} INFO - DAG(s) 'example_branch_labels' retrieved from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:19:45.796+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:45.794+0000] {override.py:1911} INFO - Created Permission View: can read on DAG:example_branch_labels
+[2025-01-27T12:19:45.830+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:45.829+0000] {override.py:1911} INFO - Created Permission View: can delete on DAG:example_branch_labels
+[2025-01-27T12:19:45.864+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:45.863+0000] {override.py:1911} INFO - Created Permission View: can edit on DAG:example_branch_labels
+[2025-01-27T12:19:45.908+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:45.907+0000] {override.py:1911} INFO - Created Permission View: can read on DAG Run:example_branch_labels
+[2025-01-27T12:19:45.937+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:45.937+0000] {override.py:1911} INFO - Created Permission View: can create on DAG Run:example_branch_labels
+[2025-01-27T12:19:45.975+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:45.973+0000] {override.py:1911} INFO - Created Permission View: menu access on DAG Run:example_branch_labels
+[2025-01-27T12:19:46.004+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:45.998+0000] {override.py:1911} INFO - Created Permission View: can delete on DAG Run:example_branch_labels
+[2025-01-27T12:19:46.006+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:46.005+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-01-27T12:19:46.102+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:46.102+0000] {dag.py:3262} INFO - Creating ORM DAG for example_branch_labels
+[2025-01-27T12:19:46.184+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:19:46.184+0000] {dag.py:4180} INFO - Setting next_dagrun for example_branch_labels to 2025-01-26 00:00:00+00:00, run_after=2025-01-27 00:00:00+00:00
+[2025-01-27T12:19:46.310+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py took 1.147 seconds
+[2025-01-27T12:20:17.016+0000] {processor.py:186} INFO - Started process (PID=611) to work on /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:20:17.021+0000] {processor.py:914} INFO - Processing file /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py for tasks to queue
+[2025-01-27T12:20:17.030+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:20:17.029+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:20:17.062+0000] {processor.py:925} INFO - DAG(s) 'example_branch_labels' retrieved from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:20:17.122+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:20:17.121+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-01-27T12:20:17.196+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:20:17.196+0000] {dag.py:4180} INFO - Setting next_dagrun for example_branch_labels to 2025-01-26 00:00:00+00:00, run_after=2025-01-27 00:00:00+00:00
+[2025-01-27T12:20:17.245+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py took 0.255 seconds
+[2025-01-27T12:20:47.483+0000] {processor.py:186} INFO - Started process (PID=902) to work on /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:20:47.485+0000] {processor.py:914} INFO - Processing file /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py for tasks to queue
+[2025-01-27T12:20:47.497+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:20:47.490+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:20:47.542+0000] {processor.py:925} INFO - DAG(s) 'example_branch_labels' retrieved from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:20:47.607+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:20:47.607+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-01-27T12:20:47.661+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:20:47.661+0000] {dag.py:4180} INFO - Setting next_dagrun for example_branch_labels to 2025-01-26 00:00:00+00:00, run_after=2025-01-27 00:00:00+00:00
+[2025-01-27T12:20:47.713+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py took 0.254 seconds
+[2025-01-27T12:21:17.831+0000] {processor.py:186} INFO - Started process (PID=1193) to work on /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:21:17.834+0000] {processor.py:914} INFO - Processing file /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py for tasks to queue
+[2025-01-27T12:21:17.843+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:21:17.842+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:21:17.885+0000] {processor.py:925} INFO - DAG(s) 'example_branch_labels' retrieved from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:21:17.952+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:21:17.951+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-01-27T12:21:18.071+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:21:18.070+0000] {dag.py:4180} INFO - Setting next_dagrun for example_branch_labels to 2025-01-26 00:00:00+00:00, run_after=2025-01-27 00:00:00+00:00
+[2025-01-27T12:21:18.143+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py took 0.330 seconds
+[2025-01-27T12:21:49.784+0000] {processor.py:186} INFO - Started process (PID=1483) to work on /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:21:49.787+0000] {processor.py:914} INFO - Processing file /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py for tasks to queue
+[2025-01-27T12:21:49.791+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:21:49.791+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:21:49.809+0000] {processor.py:925} INFO - DAG(s) 'example_branch_labels' retrieved from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:21:49.839+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:21:49.839+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-01-27T12:21:49.878+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:21:49.878+0000] {dag.py:4180} INFO - Setting next_dagrun for example_branch_labels to 2025-01-26 00:00:00+00:00, run_after=2025-01-27 00:00:00+00:00
+[2025-01-27T12:21:49.909+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py took 0.143 seconds
+[2025-01-27T12:22:21.548+0000] {processor.py:186} INFO - Started process (PID=1780) to work on /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:22:21.550+0000] {processor.py:914} INFO - Processing file /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py for tasks to queue
+[2025-01-27T12:22:21.554+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:22:21.553+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:22:21.585+0000] {processor.py:925} INFO - DAG(s) 'example_branch_labels' retrieved from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:22:21.627+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:22:21.626+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-01-27T12:22:21.677+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:22:21.677+0000] {dag.py:4180} INFO - Setting next_dagrun for example_branch_labels to 2025-01-26 00:00:00+00:00, run_after=2025-01-27 00:00:00+00:00
+[2025-01-27T12:22:21.717+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py took 0.189 seconds
+[2025-01-27T12:22:53.084+0000] {processor.py:186} INFO - Started process (PID=2069) to work on /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:22:53.089+0000] {processor.py:914} INFO - Processing file /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py for tasks to queue
+[2025-01-27T12:22:53.094+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:22:53.094+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:22:53.126+0000] {processor.py:925} INFO - DAG(s) 'example_branch_labels' retrieved from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:22:53.180+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:22:53.179+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-01-27T12:22:53.236+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:22:53.236+0000] {dag.py:4180} INFO - Setting next_dagrun for example_branch_labels to 2025-01-26 00:00:00+00:00, run_after=2025-01-27 00:00:00+00:00
+[2025-01-27T12:22:53.273+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py took 0.204 seconds
+[2025-01-27T12:23:23.425+0000] {processor.py:186} INFO - Started process (PID=2360) to work on /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:23:23.427+0000] {processor.py:914} INFO - Processing file /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py for tasks to queue
+[2025-01-27T12:23:23.431+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:23:23.430+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:23:23.451+0000] {processor.py:925} INFO - DAG(s) 'example_branch_labels' retrieved from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:23:23.481+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:23:23.481+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-01-27T12:23:23.517+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:23:23.517+0000] {dag.py:4180} INFO - Setting next_dagrun for example_branch_labels to 2025-01-26 00:00:00+00:00, run_after=2025-01-27 00:00:00+00:00
+[2025-01-27T12:23:23.548+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py took 0.134 seconds
+[2025-01-27T12:23:53.655+0000] {processor.py:186} INFO - Started process (PID=2645) to work on /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:23:53.657+0000] {processor.py:914} INFO - Processing file /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py for tasks to queue
+[2025-01-27T12:23:53.662+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:23:53.661+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:23:53.699+0000] {processor.py:925} INFO - DAG(s) 'example_branch_labels' retrieved from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py
+[2025-01-27T12:23:53.747+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:23:53.746+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-01-27T12:23:53.809+0000] {logging_mixin.py:190} INFO - [2025-01-27T12:23:53.808+0000] {dag.py:4180} INFO - Setting next_dagrun for example_branch_labels to 2025-01-26 00:00:00+00:00, run_after=2025-01-27 00:00:00+00:00
+[2025-01-27T12:23:53.853+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_branch_labels.py took 0.219 seconds
