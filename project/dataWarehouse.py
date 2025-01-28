@@ -114,7 +114,7 @@ df = pd.read_csv(
     encoding='utf-8',
     on_bad_lines='warn',
     parse_dates=['Crash Date/Time'],
-    date_parser=lambda x: pd.to_datetime(x, format=date_format)
+    date_format="%m/%d/%Y %I:%M:%S %p"  # Use date_format instead of date_parser
 )
 
 # Clean and standardize date/time values
