@@ -1,22 +1,33 @@
-import sqlite3
+import psycopg2
 import pandas as pd
 
-def analyze_database_tables(db_path, db_name):
+def analyze_database_tables(db_name, db_config):
     """
-    Analiza todas las tablas en una base de datos SQLite y retorna sus conteos
+    Analiza todas las tablas en una base de datos PostgreSQL y retorna sus conteos
     
     Args:
-        db_path (str): Ruta al archivo de la base de datos
-        db_name (str): Nombre descriptivo de la base de datos
+        db_name (str): Nombre de la base de datos
+        db_config (dict): Configuración de conexión a la base de datos
         
     Returns:
         list: Lista de diccionarios con información de cada tabla
     """
-    conn = sqlite3.connect(db_path)
+    # Creamos la conexión a PostgreSQL
+    conn = psycopg2.connect(
+        database=db_name,
+        user=db_config['user'],
+        password=db_config['password'],
+        host=db_config['host'],
+        port=db_config['port']
+    )
     cursor = conn.cursor()
     
     # Obtenemos todas las tablas de la base de datos
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    cursor.execute("""
+        SELECT table_name 
+        FROM information_schema.tables 
+        WHERE table_schema = 'public'
+    """)
     tables = cursor.fetchall()
     
     table_stats = []
@@ -29,9 +40,13 @@ def analyze_database_tables(db_path, db_name):
         count = cursor.fetchone()[0]
         
         # Obtenemos información de columnas
-        cursor.execute(f"PRAGMA table_info({table_name})")
-        columns = cursor.fetchall()
-        num_columns = len(columns)
+        cursor.execute("""
+            SELECT COUNT(*) 
+            FROM information_schema.columns 
+            WHERE table_schema = 'public' 
+            AND table_name = %s
+        """, (table_name,))
+        num_columns = cursor.fetchone()[0]
         
         # Guardamos estadísticas
         table_stats.append({
@@ -78,26 +93,25 @@ def print_database_summary(stats):
             print(f"    Columnas: {row['column_count']}")
 
 def main():
+    # Configuración de la base de datos
+    DB_CONFIG = {
+        'user': 'postgres',
+        'password': '1234',
+        'host': 'localhost',
+        'port': '5433'
+    }
+    
     # Definimos las bases de datos a analizar
-    databases = [
-        {
-            'path': 'data/crashDW.db',
-            'name': 'CrashDW'
-        },
-        {
-            'path': 'data/vehicleDW.db',
-            'name': 'VehicleDW'
-        }
-    ]
+    databases = ['crashDW', 'vehicleDW']
     
     # Recolectamos estadísticas de todas las bases de datos
     all_stats = []
-    for db in databases:
+    for db_name in databases:
         try:
-            stats = analyze_database_tables(db['path'], db['name'])
+            stats = analyze_database_tables(db_name, DB_CONFIG)
             all_stats.extend(stats)
         except Exception as e:
-            print(f"Error al analizar {db['name']}: {str(e)}")
+            print(f"Error al analizar {db_name}: {str(e)}")
     
     # Imprimimos el resumen
     print_database_summary(all_stats)
