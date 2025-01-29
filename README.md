@@ -35,16 +35,16 @@ Sistema de análisis de accidentes de tráfico utilizando un modelo dimensional 
 
 2. 
 ```bash
-docker compose up airflow-init
+docker-compose up airflow-init
 ```
 
 3. 
 ```bash
-docker compose up -d
+docker-compose up -d
 ```
 
 ```bash
-docker compose down -v
+docker-compose down -v
 ```
 
 
