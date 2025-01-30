@@ -1,32 +1,32 @@
-# Crash Analysis SQL Queries Documentation
+# Documentación de Consultas SQL para Análisis de Accidentes
 
-## Overview
+## Descripción General
 
-These SQL queries are designed to analyze crash data across several dimensions, providing valuable insights into traffic safety patterns. The queries address three main areas:
+Estas consultas SQL están diseñadas para analizar datos de accidentes en varias dimensiones, proporcionando información valiosa sobre patrones de seguridad vial. Las consultas abordan tres áreas principales:
 
-1. Key Performance Indicators (KPIs) and Totals
-2. Severity Metrics and Averages
-3. Complex Pattern Analysis
+1. Indicadores Clave de Rendimiento (KPIs) y Totales
+2. Métricas de Severidad y Promedios
+3. Análisis de Patrones Complejos
 
-### Goals Addressed
+### Objetivos Abordados
 
-#### 1. KPIs and Total Metrics
-Queries 1, 2, 5, and 7 focus on aggregate counts, including total crashes, municipality rankings, and driver fault distribution.
+#### 1. Métricas KPI y Totales
+Las consultas se centran en recuentos agregados, incluyendo total de accidentes, clasificación por municipios y distribución de responsabilidad del conductor.
 
-#### 2. Severity Analysis
-Queries 3, 4, and 6 analyze crash severity through metrics like average injuries and vehicle involvement.
+#### 2. Análisis de Severidad
+Múltiples consultas analizan la severidad de los accidentes a través de métricas como lesiones promedio y participación de vehículos.
 
-#### 3. Pattern Recognition
-All queries contribute to identifying non-obvious patterns such as:
-- Temporal trends (daily and monthly patterns)
-- Weather impact on crash severity
-- Route type and collision type correlations
+#### 3. Reconocimiento de Patrones
+Las consultas contribuyen a identificar patrones no obvios como:
+- Tendencias temporales (patrones diarios y mensuales)
+- Impacto del clima en la severidad de accidentes
+- Correlaciones entre tipo de ruta y tipo de colisión
 
-## Queries
+## Consultas
 
-### 1. Temporal Analysis: Crashes by Year and Month
+### 1. Análisis Temporal: Accidentes por Año y Mes
 
-This query provides a time-series analysis of crash frequency.
+Esta consulta proporciona un análisis de series temporales de la frecuencia de accidentes.
 
 ```sql
 SELECT 
@@ -40,29 +40,11 @@ GROUP BY dt.year, dt.month
 ORDER BY dt.year, dt.month;
 ```
 
-**Key Insight:** Identifies seasonal patterns and long-term trends in crash frequency.
+**Perspectiva Clave:** Identifica patrones estacionales y tendencias a largo plazo en la frecuencia de accidentes. Esto ayuda a comprender la distribución anual y mensual de accidentes para la asignación de recursos y estrategias de prevención.
 
-### 2. Geographic Analysis: Top 5 High-Crash Municipalities
+### 2. Análisis de Severidad por Día de la Semana
 
-Identifies municipalities with the highest crash frequencies.
-
-```sql
-SELECT
-    loc.municipality,
-    COUNT(fc.fact_crash_id) AS total_crashes
-FROM FactCrash AS fc
-JOIN DimLocation_Crash AS loc 
-    ON fc.location_key_crash = loc.location_key_crash
-GROUP BY loc.municipality
-ORDER BY total_crashes DESC
-LIMIT 5;
-```
-
-**Key Insight:** Highlights areas requiring focused safety interventions.
-
-### 3. Day-of-Week Severity Analysis
-
-Examines how crash severity varies across different days of the week.
+Examina cómo varía la severidad de los accidentes en diferentes días de la semana.
 
 ```sql
 SELECT 
@@ -75,46 +57,32 @@ GROUP BY dt.day_of_week
 ORDER BY avg_injuries DESC;
 ```
 
-**Key Insight:** Reveals potential patterns in crash severity related to weekday vs. weekend traffic patterns.
+**Perspectiva Clave:** Revela patrones potenciales en la severidad de accidentes relacionados con patrones de tráfico de días laborables versus fines de semana, ayudando a identificar períodos de alto riesgo.
 
-### 4. Weather Impact Analysis
+### 3. Análisis de Clima y Tipo de Colisión
 
-Correlates weather conditions with crash severity.
-
-```sql
-SELECT
-    cond.weather,
-    ROUND(AVG(fc.num_injuries), 2) AS avg_injuries
-FROM FactCrash AS fc
-JOIN DimCondition_Crash AS cond
-    ON fc.condition_key_crash = cond.condition_key_crash
-GROUP BY cond.weather
-ORDER BY avg_injuries DESC
-LIMIT 5;
-```
-
-**Key Insight:** Quantifies the relationship between weather conditions and crash severity.
-
-### 5. Infrastructure Analysis: Crashes by Route Type
-
-Analyzes crash distribution across different road classifications.
+Correlaciona las condiciones climáticas con tipos de colisión para entender el impacto ambiental en los accidentes.
 
 ```sql
-SELECT
-    loc.route_type,
-    COUNT(fc.fact_crash_id) AS total_crashes
-FROM FactCrash AS fc
-JOIN DimLocation_Crash AS loc
-    ON fc.location_key_crash = loc.location_key_crash
-GROUP BY loc.route_type
-ORDER BY total_crashes DESC;
+SELECT 
+    ct.collision_type, 
+    c.weather, 
+    COUNT(*) AS accident_count
+FROM FactCrash f
+JOIN DimCrashType ct 
+    ON f.crash_type_key = ct.crash_type_key
+JOIN DimCondition_Crash c 
+    ON f.condition_key_crash = c.condition_key_crash
+GROUP BY ct.collision_type, c.weather
+ORDER BY accident_count DESC
+LIMIT 10;
 ```
 
-**Key Insight:** Identifies which road types experience disproportionate crash volumes.
+**Perspectiva Clave:** Ayuda a identificar qué condiciones climáticas están asociadas con tipos específicos de colisiones, permitiendo medidas de seguridad dirigidas durante clima adverso.
 
-### 6. Collision Type Vehicle Analysis
+### 4. Análisis de Vehículos por Tipo de Colisión
 
-Examines the relationship between collision types and number of vehicles involved.
+Examina la relación entre tipos de colisión y número de vehículos involucrados.
 
 ```sql
 SELECT
@@ -127,22 +95,23 @@ GROUP BY ctype.collision_type
 ORDER BY avg_vehicles_involved DESC;
 ```
 
-**Key Insight:** Reveals which collision types typically involve more vehicles.
+**Perspectiva Clave:** Revela qué tipos de colisiones típicamente involucran más vehículos, ayudando en la planificación de respuesta a emergencias y asignación de recursos.
 
-### 7. Driver Fault Analysis
+### 5. Análisis Anual de Lesiones y Fatalidades
 
-Analyzes the distribution of fault attribution in crashes.
+Calcula el total de lesiones y fatalidades por año para rastrear tendencias de seguridad.
 
 ```sql
-SELECT
-    drv.driver_at_fault,
-    COUNT(fv.fact_vehicle_id) AS total_vehicles
-FROM FactVehicleInvolment AS fv
-JOIN DimDriver AS drv
-    ON fv.driver_key = drv.driver_key
-GROUP BY drv.driver_at_fault
-ORDER BY total_vehicles DESC;
+SELECT 
+    dt.year, 
+    SUM(fc.num_injuries) AS total_injuries, 
+    SUM(fc.num_fatalities) AS total_fatalities
+FROM DimDateTime_Crash dt
+JOIN FactCrash fc 
+    ON dt.date_key_crash = fc.date_key_crash
+GROUP BY dt.year
+ORDER BY dt.year;
 ```
 
-**Key Insight:** Provides insights into fault attribution patterns in crash records.
+**Perspectiva Clave:** Proporciona un análisis crucial de tendencias año tras año de la severidad de accidentes, ayudando a medir la efectividad de las iniciativas de seguridad e identificar áreas que necesitan mejora.
 
