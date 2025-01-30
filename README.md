@@ -1,7 +1,10 @@
 # Data Warehouse de Accidentes de Tráfico
 
 ## Descripción del dataset seleccionado
-Este dataset muestra información sobre accidentes de tránsito registrados en distintas agencias policiales de Maryland. La información que se muestra en cada registro presenta un incidente con detalles sobre el tipo de colisión, condiciones ambientales,  características del vehículo y otros factores relevantes.
+Este conjunto de datos contiene información detallada sobre los conductores de vehículos involucrados en colisiones de tránsito en las carreteras locales y dentro del condado de Montgomery, Maryland. Estos datos son fueron obtenidos a través del Sistema de Informe Automatizado de Accidentes (ACRS) de la Policía Estatal de Maryland y son reportados por diversas agencias policiales, incluyendo la Policía del Condado de Montgomery, la Policía de Gaithersburg, la Policía de Rockville y la Policía de Maryland-National Capital Park.
+
+El conjunto de datos documenta cada colisión registrada en estas áreas, proporcionando detalles sobre los incidentes, los conductores involucrados y otros factores relevantes. Sin embargo, es importante tener en cuenta que la información contenida en estos registros proviene de reportes preliminares entregados por las partes involucradas y los agentes que cubrieron la escena.
+
 Sistema de análisis de accidentes de tráfico utilizando un modelo dimensional con dos tablas de hechos principales.
 
 ## 📊 Modelo de Datos
