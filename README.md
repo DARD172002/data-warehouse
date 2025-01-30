@@ -1,5 +1,7 @@
 # Data Warehouse de Accidentes de Tráfico
 
+## Descripción del dataset seleccionado
+###  Este dataset muestra información sobre accidentes de tránsito registrados en distintas agencias policiales de Maryland. La información que se muestra en cada registro presenta un incidente con detalles sobre el tipo de colisión, condiciones ambientales,  características del vehículo y otros factores relevantes.
 Sistema de análisis de accidentes de tráfico utilizando un modelo dimensional con dos tablas de hechos principales.
 
 ## 📊 Modelo de Datos
