@@ -47,14 +47,19 @@ ORDER BY dt.year, dt.month;
 Examina cómo varía la severidad de los accidentes en diferentes días de la semana.
 
 ```sql
+WITH TotalInjuries AS (
+    SELECT SUM(fc.num_injuries) AS total_injuries
+    FROM FactCrash AS fc
+)
 SELECT 
     dt.day_of_week,
-    ROUND(AVG(fc.num_injuries), 2) AS avg_injuries
+    SUM(fc.num_injuries) AS total_injuries_day,
+    ROUND((SUM(fc.num_injuries) * 100.0) / (SELECT total_injuries FROM TotalInjuries), 2) AS percentage_injuries
 FROM FactCrash AS fc
 JOIN DimDateTime_Crash AS dt
     ON fc.date_key_crash = dt.date_key_crash
 GROUP BY dt.day_of_week
-ORDER BY avg_injuries DESC;
+ORDER BY percentage_injuries DESC;
 ```
 
 **Perspectiva Clave:** Revela patrones potenciales en la severidad de accidentes relacionados con patrones de tráfico de días laborables versus fines de semana, ayudando a identificar períodos de alto riesgo.
@@ -92,7 +97,8 @@ FROM FactCrash AS fc
 JOIN DimCrashType AS ctype 
     ON fc.crash_type_key = ctype.crash_type_key
 GROUP BY ctype.collision_type
-ORDER BY avg_vehicles_involved DESC;
+ORDER BY avg_vehicles_involved DESC
+LIMIT 25;
 ```
 
 **Perspectiva Clave:** Revela qué tipos de colisiones típicamente involucran más vehículos, ayudando en la planificación de respuesta a emergencias y asignación de recursos.
@@ -115,3 +121,25 @@ ORDER BY dt.year;
 
 **Perspectiva Clave:** Proporciona un análisis crucial de tendencias año tras año de la severidad de accidentes, ayudando a medir la efectividad de las iniciativas de seguridad e identificar áreas que necesitan mejora.
 
+
+### 6. Análisis de Vehículos Involucrados en Accidentes
+Esta consulta identifica las marcas y modelos de vehículos más frecuentemente involucrados en accidentes, asegurando que solo se incluyan registros con datos válidos.
+
+```sql
+SELECT 
+    v.vehicle_make,
+    v.vehicle_model,
+    COUNT(fv.fact_vehicle_id) AS total_accidentes
+FROM 
+    DimVehicle v
+JOIN 
+    FactVehicleInvolment fv ON v.vehicle_key = fv.vehicle_key
+WHERE v.vehicle_make <> ''
+GROUP BY 
+    v.vehicle_make, v.vehicle_model
+ORDER BY 
+    total_accidentes DESC
+LIMIT 10;
+```
+
+**Perspectiva Clave:** Revela qué marcas y modelos de vehículos tienen mayor presencia en accidentes, proporcionando información valiosa para fabricantes, aseguradoras y reguladores. Puede ayudar a identificar patrones de seguridad vehicular y evaluar si ciertos modelos tienen un mayor riesgo de colisión.
