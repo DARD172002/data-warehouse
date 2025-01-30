@@ -10,13 +10,13 @@ Sistema de análisis de accidentes de tráfico utilizando un modelo dimensional 
 ## 📊 Modelo de Datos
 
 <div align="center">
-  <a href="">
+  <a href="https://github.com/DARD172002/data-warehouse/blob/master/docs/Modelo%20Dimensional/FactCrash.drawio.png">
     <img src="docs\Modelo Dimensional\FactCrash.drawio.png" width="450" alt="MongoDB Logo">
     <br>
     <em>Esquema Estrella de Accidentes</em>
   </a>
 <br><br>
-  <a href="">
+  <a href="https://github.com/DARD172002/data-warehouse/blob/master/docs/Modelo%20Dimensional/FactVehicleInvolment.drawio.png">
     <img src="docs\Modelo Dimensional\FactVehicleInvolment.drawio.png" width="400" alt="Neo4j Logo">
     <br>
     <em>Esquema Estrella de Vehículos Involucrados</em>
