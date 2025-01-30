@@ -9,49 +9,23 @@ Sistema de análisis de accidentes de tráfico utilizando un modelo dimensional 
 
 ## 📊 Modelo de Datos
 
-### Tablas de Hechos
+<div align="center">
+  <a href="">
+    <img src="docs\Modelo Dimensional\FactCrash.drawio.png" width="450" alt="MongoDB Logo">
+    <br>
+    <em>Esquema Estrella de Accidentes</em>
+  </a>
+<br><br>
+  <a href="">
+    <img src="docs\Modelo Dimensional\FactVehicleInvolment.drawio.png" width="400" alt="Neo4j Logo">
+    <br>
+    <em>Esquema Estrella de Vehículos Involucrados</em>
+  </a>
+</div>
 
-#### 1. FactCrash
-* **Métricas:**
-  * Número de vehículos involucrados
-  * Número de lesiones
-  * Número de fatalidades
-  * Número de reporte
-* **Dimensiones:**
-  * Tiempo (DimDateTime_Crash)
-  * Ubicación (DimLocation_Crash)
-  * Condiciones (DimCondition_Crash)
-  * Tipo de Accidente (DimCrashType)
+## Consultas Analíticas
 
-#### 2. FactVehicleInvolvement
-* **Métricas:**
-  * Severidad de lesiones
-  * Indicador de culpabilidad del conductor
-  * Circunstancias
-* **Dimensiones:**
-  * Tiempo (DimDateTime_Veh)
-  * Ubicación (DimLocation_Veh)
-  * Conductor (DimDriver)
-  * Vehículo (DimVehicle)
-
-# Ejecución
-
-1. Ejecutar Docker Desktop
-
-2. 
-```bash
-docker-compose up airflow-init
-```
-
-3. 
-```bash
-docker-compose up -d
-```
-
-```bash
-docker-compose down -v
-```
-
+Esta sección se encuentra [aquí](https://github.com/DARD172002/data-warehouse/blob/master/docs/analytitcalQueries.md).
 
 # Desarrolladores
 
