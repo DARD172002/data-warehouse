@@ -115,8 +115,8 @@ df = pd.read_csv(
     na_values=na_values,
     encoding='utf-8',
     on_bad_lines='warn',
-    parse_dates=['Crash Date/Time'],
-    date_format="%m/%d/%Y %I:%M:%S %p"  # Use date_format instead of date_parser
+    #parse_dates=['Crash Date/Time'],
+    #date_format="%m/%d/%Y %I:%M:%S %p"  # Use date_format instead of date_parser
 )
 
 # Clean and standardize date/time values
@@ -131,9 +131,11 @@ def clean_datetime(date_str):
 
 # Apply cleaning functions to relevant columns
 for col in df.columns:
-    if col == 'Crash Date/Time':
-        df[col] = df[col].apply(clean_datetime)
-    elif df[col].dtype in ['int64', 'float64']:
+    #if col == 'Crash Date/Time':
+     #   df[col] = df[col].apply(clean_datetime)
+    #el
+    
+    if df[col].dtype in ['int64', 'float64']:
         df[col] = df[col].apply(clean_numeric_value)
     else:
         df[col] = df[col].apply(clean_string_value)

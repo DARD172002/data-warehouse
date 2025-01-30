@@ -4,7 +4,7 @@ def print_table_records(cursor, table_name):
     """
     Helper function to fetch and print the first 5 records of a table
     """
-    cursor.execute(f"SELECT * FROM {table_name} LIMIT 10")
+    cursor.execute(f"SELECT * FROM {table_name} LIMIT 5")
     records = cursor.fetchall()
     
     # Get column names
