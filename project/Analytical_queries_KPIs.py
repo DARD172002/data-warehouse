@@ -1,44 +1,36 @@
 import sqlite3
 
-# --------------------------------------------------------------------
-# 1. Primera consulta analítica
-# --------------------------------------------------------------------
-def fetch_accidents_by_collision_and_weather(cursor):
+def accidentes_por_tipo_colision():
     """
-    Fetch and print accident counts grouped by collision type and weather condition.
+    Calcula la cantidad total de accidentes por tipo de colisión en la base de datos CrashDW.
     """
+    # Conectar a la base de datos
+    crash_conn = sqlite3.connect("data/crashDW.db")
+    crash_cursor = crash_conn.cursor()
+
+    # Ejecutar la consulta
     query = """
-    SELECT 
-        ct.collision_type, 
-        c.weather, 
-        COUNT(*) AS Accident_Count
-    FROM FactCrash f
-    JOIN DimCrashType ct ON f.crash_type_key = ct.crash_type_key
-    JOIN DimCondition_Crash c ON f.condition_key_crash = c.condition_key_crash
-    GROUP BY ct.collision_type, c.weather
-    ORDER BY Accident_Count DESC
-    LIMIT 10;
+    SELECT ct.collision_type, COUNT(fc.fact_crash_id) AS total_accidentes
+    FROM DimCrashType ct
+    JOIN FactCrash fc ON ct.crash_type_key = fc.crash_type_key
+    GROUP BY ct.collision_type
+    ORDER BY total_accidentes DESC;
     """
     
-    cursor.execute(query)
-    records = cursor.fetchall()
-    
-    print("\n=== Top 10 Accident Types by Collision and Weather ===")
-    print("Collision Type | Weather | Accident Count")
-    print("-" * 50)
+    crash_cursor.execute(query)
+    records = crash_cursor.fetchall()
+
+    # Imprimir resultados
+    print("\n=== Cantidad de accidentes por tipo de colisión ===")
+    print("Tipo de Colisión | Total de Accidentes")
     for record in records:
-        print(f"{record[0]} | {record[1]} | {record[2]}")
+        print(f"{record[0]} | {record[1]}")
 
-# Connect to CrashDW database
-print("\nQuerying CrashDW database...")
-crash_conn = sqlite3.connect("data/crashDW.db")
-crash_cursor = crash_conn.cursor()
+    # Cerrar conexión
+    crash_conn.close()
 
-# Execute the query
-fetch_accidents_by_collision_and_weather(crash_cursor)
-
-# Close the connection
-crash_conn.close()
+# Ejecutar la función
+accidentes_por_tipo_colision()
 
 
 # --------------------------------------------------------------------
@@ -144,40 +136,3 @@ def heridos_y_fallecidos_por_anio():
 
 # Ejecutar la función
 heridos_y_fallecidos_por_anio()
-
-# --------------------------------------------------------------------
-# 5. Quinta consulta analítica
-# --------------------------------------------------------------------
-
-def vehiculos_mas_involucrados():
-    """
-    Obtiene los modelos de vehículos más involucrados en accidentes en la base de datos VehicleDW.
-    """
-    # Conectar a la base de datos
-    vehicle_conn = sqlite3.connect("data/vehicleDW.db")
-    vehicle_cursor = vehicle_conn.cursor()
-
-    # Ejecutar la consulta
-    query = """
-    SELECT v.vehicle_make, v.vehicle_model, COUNT(fv.fact_vehicle_id) AS total_accidentes
-    FROM DimVehicle v
-    JOIN FactVehicleInvolment fv ON v.vehicle_key = fv.vehicle_key
-    GROUP BY v.vehicle_make, v.vehicle_model
-    ORDER BY total_accidentes DESC
-    LIMIT 10;
-    """
-    
-    vehicle_cursor.execute(query)
-    records = vehicle_cursor.fetchall()
-
-    # Imprimir resultados
-    print("\n=== Vehículos más involucrados en accidentes ===")
-    print("Marca | Modelo | Total de Accidentes")
-    for record in records:
-        print(f"{record[0]} | {record[1]} | {record[2]}")
-
-    # Cerrar conexión
-    vehicle_conn.close()
-
-# Ejecutar la función
-vehiculos_mas_involucrados()

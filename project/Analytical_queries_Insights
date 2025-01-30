@@ -1,0 +1,128 @@
+import sqlite3
+
+# --------------------------------------------------------------------
+# 1. Primera consulta analítica
+# --------------------------------------------------------------------
+
+def vehiculos_mas_involucrados():
+    """
+    Obtiene los modelos de vehículos más involucrados en accidentes en la base de datos VehicleDW.
+    """
+    # Conectar a la base de datos
+    vehicle_conn = sqlite3.connect("data/vehicleDW.db")
+    vehicle_cursor = vehicle_conn.cursor()
+
+    # Ejecutar la consulta
+    query = """
+    SELECT v.vehicle_make, v.vehicle_model, COUNT(fv.fact_vehicle_id) AS total_accidentes
+    FROM DimVehicle v
+    JOIN FactVehicleInvolment fv ON v.vehicle_key = fv.vehicle_key
+    GROUP BY v.vehicle_make, v.vehicle_model
+    ORDER BY total_accidentes DESC
+    LIMIT 10;
+    """
+    
+    vehicle_cursor.execute(query)
+    records = vehicle_cursor.fetchall()
+
+    # Imprimir resultados
+    print("\n=== Vehículos más involucrados en accidentes ===")
+    print("Marca | Modelo | Total de Accidentes")
+    for record in records:
+        print(f"{record[0]} | {record[1]} | {record[2]}")
+
+    # Cerrar conexión
+    vehicle_conn.close()
+
+# Ejecutar la función
+vehiculos_mas_involucrados()
+
+
+# --------------------------------------------------------------------
+# 2. Segunda consulta analítica
+# --------------------------------------------------------------------
+def impacto_condiciones_climaticas():
+    """
+    Analiza el impacto de las condiciones climáticas en la cantidad de accidentes
+    y calcula el porcentaje de cada condición con respecto al total de accidentes.
+    """
+    # Conectar a la base de datos
+    crash_conn = sqlite3.connect("data/crashDW.db")
+    crash_cursor = crash_conn.cursor()
+
+    # Obtener el total de accidentes en la base de datos
+    crash_cursor.execute("SELECT COUNT(fact_crash_id) FROM FactCrash")
+    total_accidentes = crash_cursor.fetchone()[0]
+
+    # Ejecutar la consulta principal
+    query = """
+    SELECT cc.weather, 
+           COUNT(fc.fact_crash_id) AS total_accidentes, 
+           ROUND((COUNT(fc.fact_crash_id) * 100.0 / ?), 2) AS porcentaje_accidentes,
+           SUM(fc.num_injuries) AS total_heridos, 
+           SUM(fc.num_fatalities) AS total_fallecidos
+    FROM DimCondition_Crash cc
+    JOIN FactCrash fc ON cc.condition_key_crash = fc.condition_key_crash
+    GROUP BY cc.weather
+    ORDER BY total_accidentes DESC;
+    """
+    
+    crash_cursor.execute(query, (total_accidentes,))
+    records = crash_cursor.fetchall()
+
+    # Imprimir resultados
+    print("\n=== Impacto de las condiciones climáticas en los accidentes ===")
+    print("Condición Climática | Total Accidentes | % | Total Heridos | Total Fallecidos")
+    for record in records:
+        print(f"{record[0]} | {record[1]} | {record[2]}% | {record[3]} | {record[4]}")
+
+    # Cerrar conexión
+    crash_conn.close()
+
+# Ejecutar la función
+impacto_condiciones_climaticas()
+
+
+# --------------------------------------------------------------------
+# 3. Tercera consulta analítica
+# --------------------------------------------------------------------
+def municipios_mas_accidentes():
+    """
+    Identifica los municipios con mayor cantidad de accidentes registrados en la base de datos CrashDW.
+    """
+    # Conectar a la base de datos
+    crash_conn = sqlite3.connect("data/crashDW.db")
+    crash_cursor = crash_conn.cursor()
+
+    # Ejecutar la consulta
+    query = """
+    SELECT dlc.municipality, 
+           COUNT(fc.fact_crash_id) AS total_accidentes,
+           SUM(fc.num_injuries) AS total_heridos,
+           SUM(fc.num_fatalities) AS total_fallecidos
+    FROM DimLocation_Crash dlc
+    JOIN FactCrash fc ON dlc.location_key_crash = fc.location_key_crash
+    GROUP BY dlc.municipality
+    ORDER BY total_accidentes DESC
+    LIMIT 10;
+    """
+    
+    crash_cursor.execute(query)
+    records = crash_cursor.fetchall()
+
+    # Imprimir resultados
+    print("\n=== Municipios con más accidentes ===")
+    print("Municipio | Total Accidentes | Total Heridos | Total Fallecidos")
+    for record in records:
+        print(f"{record[0]} | {record[1]} | {record[2]} | {record[3]}")
+
+    # Cerrar conexión
+    crash_conn.close()
+
+# Ejecutar la función
+municipios_mas_accidentes()
+
+
+# --------------------------------------------------------------------
+# 4. Cuarta consulta analítica
+# --------------------------------------------------------------------
