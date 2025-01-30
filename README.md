@@ -29,6 +29,25 @@ Sistema de análisis de accidentes de tráfico utilizando un modelo dimensional 
   * Conductor (DimDriver)
   * Vehículo (DimVehicle)
 
+# Ejecución
+
+1. Ejecutar Docker Desktop
+
+2. 
+```bash
+docker-compose up airflow-init
+```
+
+3. 
+```bash
+docker-compose up -d
+```
+
+```bash
+docker-compose down -v
+```
+
+
 # Desarrolladores
 
 * **Anthony Montero** - [AnthonyHMR](https://github.com/AnthonyHMR)
